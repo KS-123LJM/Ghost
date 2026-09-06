@@ -1,0 +1,22 @@
+{{!< default}}
+
+{{#post}}
+
+<main id="site-main" class="site-main">
+<article class="article {{post_class}}">
+
+    <header class="article-header gh-canvas">
+        <h1 class="article-title">{{title}}</h1>
+        {{#if custom_excerpt}}
+            <p class="article-excerpt">{{custom_excerpt}}</p>
+        {{/if}}
+    </header>
+
+    <section class="gh-content gh-canvas">
+        {{content}}
+    </section>
+
+</article>
+</main>
+
+{{/post}}

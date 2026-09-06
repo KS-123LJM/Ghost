@@ -1,0 +1,23 @@
+{{!< default}}
+
+{{!-- Tag archive page --}}
+<div class="site-header-content outer">
+    <div class="site-header-inner inner">
+        <h1 class="site-title">{{name}}</h1>
+        {{#if description}}
+            <p class="site-description">{{description}}</p>
+        {{/if}}
+        <p class="site-meta">共 {{pagination.total}} 篇文章</p>
+    </div>
+</div>
+
+<main id="site-main" class="site-main outer">
+<div class="inner posts">
+    <div class="post-feed">
+        {{#foreach posts}}
+            {{> "post-card"}}
+        {{/foreach}}
+    </div>
+    {{pagination}}
+</div>
+</main>

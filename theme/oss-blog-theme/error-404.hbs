@@ -1,0 +1,23 @@
+{{!< default}}
+
+{{!-- 自定义404页面：友好提示 + 返回首页 + 搜索入口 --}}
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+
+        <section class="error-content">
+            <h1 class="error-code">404</h1>
+            <h2 class="error-message">页面未找到</h2>
+            <p class="error-description">
+                抱歉，您访问的页面不存在或已被移动。<br>
+                您可以返回首页，或使用搜索功能查找感兴趣的内容。
+            </p>
+            <div class="error-actions">
+                <a class="error-home-btn" href="{{@site.url}}">返回首页</a>
+                <button type="button" class="error-search-btn" data-ghost-search aria-label="搜索文章">
+                    搜索文章
+                </button>
+            </div>
+        </section>
+
+    </div>
+</main>
