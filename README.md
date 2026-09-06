@@ -1,3 +1,77 @@
+# 实验01：开源个人博客系统二次开发
+
+> 本仓库为《开源软件与新技术》课程实验01的个人开发仓库，基于Ghost开源博客系统进行二次开发。
+
+## 实验信息
+
+| 项目 | 内容 |
+|------|------|
+| 课程 | 开源软件与新技术 |
+| 实验 | 实验01 开源个人博客系统二次开发 |
+| 学号 | 23110506008 |
+| 上游项目 | [TryGhost/Ghost](https://github.com/TryGhost/Ghost) |
+| 固定Commit | `26746d30ce` |
+| 个人仓库 | https://github.com/KS-123LJM/Ghost.git |
+| 许可证 | MIT |
+
+## 个人二次开发内容
+
+### 1. 自定义主题 (`theme/oss-blog-theme/`)
+基于Casper主题二次开发，主要修改：
+- 导航栏增加"关于"和"归档"链接，界面文字中文化
+- 文章卡片增加阅读时长和评论数显示
+- 文章详情页日期格式化为中文格式（YYYY年MM月DD日）
+- 自定义404错误页面，含友好提示和搜索入口
+- 增加自定义样式 `assets/css/oss-blog.css`
+
+### 2. 自主功能：基于标签的相关文章推荐
+在文章详情页通过Ghost Content API的 `{{#get}}` 助手实现：
+- 获取与当前文章拥有相同主标签的其他文章
+- 自动排除当前文章本身
+- 按发布时间倒序，取前3篇
+- 可通过主题设置开关和数量控制
+- **不修改Ghost核心代码**，升级不受影响
+
+### 3. 项目文档
+- `docs/baseline.md` - 实验基线记录
+- `docs/architecture.md` - 项目架构说明
+- `tests/acceptance.md` - 验收测试用例（23条，全部通过）
+- `NOTICE.md` - 第三方许可证声明
+
+## 快速开始
+
+### 环境要求
+- Node.js 22 LTS
+- Git 2.40+
+- pnpm（核心开发）或 Ghost CLI（主题安装）
+
+### 主题安装
+1. 将 `theme/oss-blog-theme/` 打包为zip
+2. 在Ghost管理端 → Settings → Design → Change theme → Upload theme
+3. 激活 oss-blog-theme 主题
+
+### 主题开发
+```bash
+cd theme/oss-blog-theme
+npm install
+npm run dev    # 开发模式
+npm run zip    # 打包为可安装zip
+npm test       # gscan兼容性检查
+```
+
+## 个人开发记录
+
+| 分支 | 说明 |
+|------|------|
+| `main` | 主分支，同步上游 + 实验文档 |
+| `feature/theme-customization` | 自定义主题开发 |
+| `feature/blog-enhancement` | 相关文章推荐功能 |
+
+## 许可证
+本项目基于Ghost（MIT）二次开发，本人开发部分采用MIT许可证。详见 [NOTICE.md](./NOTICE.md)。
+
+---
+
 &nbsp;
 <p align="center">
   <a href="https://ghost.org/#gh-light-mode-only" target="_blank">
