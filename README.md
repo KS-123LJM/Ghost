@@ -41,14 +41,71 @@
 ## 快速开始
 
 ### 环境要求
-- Node.js 22 LTS
-- Git 2.40+
-- pnpm（核心开发）或 Ghost CLI（主题安装）
+- Node.js 22 LTS（实际版本：v22.23.2）
+- Git 2.40+（实际版本：2.54.0）
+- Ghost CLI 1.32.3+（实际版本：1.32.3）
+- 操作系统：Windows 11 / Linux / macOS
+
+### 本地安装与启动
+
+#### 1. 安装Ghost CLI
+```bash
+npm install -g ghost-cli@latest
+ghost --version
+```
+
+#### 2. 安装本地Ghost实例
+```bash
+# 在仓库根目录创建runtime目录并安装
+mkdir runtime
+cd runtime
+ghost install local
+```
+
+**注意：Windows环境下需要修复express-hbs路径兼容性问题**，详见下方"Windows兼容性说明"。
+
+#### 3. 启动/停止服务
+```bash
+# 使用提供的脚本（推荐）
+.\scripts\start.ps1    # 启动
+.\scripts\stop.ps1     # 停止
+
+# 或使用Ghost CLI
+cd runtime
+ghost start --development
+ghost stop
+```
+
+#### 4. 完成初始化
+访问 http://localhost:2368/ghost/ 完成管理员账号设置，或使用初始化脚本：
+```bash
+.\scripts\init-demo.ps1
+```
+
+### 演示账号
+
+| 角色 | 邮箱 | 密码 | 说明 |
+|------|------|------|------|
+| 管理员 | admin@oss-blog.local | Admin@2026Lab | 后台管理、文章发布 |
+| 会员1 | zhangsan@oss-blog.local | （需通过前台注册设置） | 评论、会员功能 |
+| 会员2 | lisi@oss-blog.local | （需通过前台注册设置） | 评论、会员功能 |
+
+### 演示数据
+- **文章**：9篇（含1篇默认欢迎文章 + 8篇自定义文章）
+- **标签**：技术分享、生活随笔、开源项目
+- **覆盖场景**：长标题、代码块、中文搜索词、多标签、精选文章
 
 ### 主题安装
 1. 将 `theme/oss-blog-theme/` 打包为zip
 2. 在Ghost管理端 → Settings → Design → Change theme → Upload theme
 3. 激活 oss-blog-theme 主题
+
+或通过API安装：
+```bash
+# 打包主题
+Compress-Archive -Path theme\oss-blog-theme\* -DestinationPath oss-blog-theme.zip
+# 通过管理API上传并激活
+```
 
 ### 主题开发
 ```bash
@@ -58,6 +115,60 @@ npm run dev    # 开发模式
 npm run zip    # 打包为可安装zip
 npm test       # gscan兼容性检查
 ```
+
+### 数据备份与恢复
+
+#### 备份
+```bash
+# 方式1：使用脚本
+.\scripts\backup.ps1
+
+# 方式2：管理端导出
+# Ghost管理端 → Settings → Labs → Export your content
+
+# 方式3：直接复制数据库文件
+# runtime/content/data/ghost-development.db
+```
+
+#### 恢复
+1. 停止Ghost服务
+2. 将备份的数据库文件复制到 `runtime/content/data/`
+3. 启动Ghost服务
+4. 或通过管理端 → Settings → Labs → Import content 导入JSON备份
+
+### Windows兼容性说明
+
+Ghost v6.x在Windows环境下存在express-hbs路径兼容性问题，表现为前台返回500错误：
+```
+Cannot read ...\default it does not reside in content\themes\...
+```
+
+**修复方法**：修改 `runtime/versions/<版本>/node_modules/.pnpm/express-hbs@2.5.0/node_modules/express-hbs/lib/hbs.js` 中的 `cacheLayout` 函数，统一路径分隔符并处理相对路径比较。
+
+本仓库已在 `docs/windows-compatibility.md` 中记录详细修复方案。
+
+## 功能清单
+
+### 必做功能（全部完成）
+- ✅ 前台和 /ghost 管理端本地访问
+- ✅ 会员注册/登录，错误登录有明确提示
+- ✅ 管理员发布并编辑文章
+- ✅ 文章关联并按标签浏览
+- ✅ 会员评论功能（权限控制）
+- ✅ 关键词搜索（Ghost原生搜索 + 主题搜索按钮）
+- ✅ 自定义主题（桌面和窄屏适配）
+- ✅ 自主功能：基于标签的相关文章推荐
+- ✅ 重启后内容和评论数据持久化
+- ✅ 内容导出与恢复
+- ✅ 主题校验和核心流程测试
+
+### 自主功能：相关文章推荐
+- **实现方式**：通过Ghost Content API的 `{{#get}}` 助手
+- **数据来源**：当前文章的主标签
+- **排序规则**：按发布时间倒序
+- **排除规则**：自动排除当前文章
+- **可配置项**：开关控制、推荐数量（2/3/4篇）
+- **修改边界**：仅主题层修改，不涉及Ghost核心代码
 
 ## 个人开发记录
 
