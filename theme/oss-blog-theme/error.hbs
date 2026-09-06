@@ -1,0 +1,15 @@
+{{!< default}}
+
+{{!-- Generic error page --}}
+<main id="site-main" class="site-main outer">
+    <div class="inner">
+        <section class="error-content">
+            <h1 class="error-code">{{code}}</h1>
+            <h2 class="error-message">{{message}}</h2>
+            <p class="error-description">抱歉，发生了错误。请稍后重试或返回首页。</p>
+            <div class="error-actions">
+                <a class="error-home-btn" href="{{@site.url}}">返回首页</a>
+            </div>
+        </section>
+    </div>
+</main>

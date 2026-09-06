@@ -1,0 +1,223 @@
+/* ============================================
+   oss-blog-theme 自定义样式
+   基于Casper主题的二次开发样式扩展
+   ============================================ */
+
+/* --- 自定义导航链接 --- */
+.gh-head-nav-link {
+    color: var(--color-darkgrey);
+    font-size: 1.5rem;
+    text-decoration: none;
+    padding: 0 1.2rem;
+    transition: color 0.2s ease;
+}
+
+.gh-head-nav-link:hover {
+    color: var(--color-primary);
+}
+
+/* --- 相关文章推荐模块 --- */
+.related-posts-wrap {
+    margin-top: 6rem;
+    margin-bottom: 4rem;
+}
+
+.related-posts-title {
+    font-size: 2.4rem;
+    font-weight: 700;
+    margin-bottom: 2.4rem;
+    color: var(--color-darkgrey);
+    text-align: center;
+}
+
+.related-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.4rem;
+}
+
+.related-card {
+    background: var(--color-white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.related-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.related-card-image-link {
+    display: block;
+    overflow: hidden;
+}
+
+.related-card-image {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.related-card:hover .related-card-image {
+    transform: scale(1.05);
+}
+
+.related-card-content {
+    padding: 1.6rem;
+}
+
+.related-card-tags {
+    margin-bottom: 0.8rem;
+}
+
+.related-card-tag a {
+    color: var(--color-primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+}
+
+.related-card-title {
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 0.8rem;
+}
+
+.related-card-title a {
+    color: var(--color-darkgrey);
+    text-decoration: none;
+}
+
+.related-card-title a:hover {
+    color: var(--color-primary);
+}
+
+.related-card-excerpt {
+    font-size: 1.3rem;
+    color: var(--color-midgrey);
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.related-card-meta {
+    font-size: 1.2rem;
+    color: var(--color-midgrey);
+}
+
+.related-card-meta .bull {
+    margin: 0 0.6rem;
+}
+
+/* --- 404页面 --- */
+.error-content {
+    text-align: center;
+    padding: 8rem 0;
+}
+
+.error-code {
+    font-size: 12rem;
+    font-weight: 800;
+    color: var(--color-primary);
+    line-height: 1;
+    margin-bottom: 1rem;
+}
+
+.error-message {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-darkgrey);
+    margin-bottom: 1.6rem;
+}
+
+.error-description {
+    font-size: 1.6rem;
+    color: var(--color-midgrey);
+    line-height: 1.6;
+    margin-bottom: 3.2rem;
+}
+
+.error-actions {
+    display: flex;
+    gap: 1.6rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.error-home-btn,
+.error-search-btn {
+    display: inline-block;
+    padding: 1.2rem 2.8rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 2px solid var(--color-primary);
+}
+
+.error-home-btn {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+.error-home-btn:hover {
+    background: transparent;
+    color: var(--color-primary);
+}
+
+.error-search-btn {
+    background: transparent;
+    color: var(--color-primary);
+}
+
+.error-search-btn:hover {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+/* --- 文章卡片自定义 --- */
+.post-card-meta-length,
+.post-card-meta-comments {
+    color: var(--color-midgrey);
+    font-size: 1.2rem;
+}
+
+.post-card-meta .bull {
+    margin: 0 0.6rem;
+}
+
+/* --- 响应式：窄屏适配 --- */
+@media (max-width: 900px) {
+    .related-posts-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .related-posts-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .error-code {
+        font-size: 8rem;
+    }
+
+    .error-message {
+        font-size: 2.2rem;
+    }
+
+    .gh-head-nav-link {
+        display: none;
+    }
+}
