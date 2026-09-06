@@ -222,3 +222,29 @@ yalc.lock
 .github/instructions/nx.instructions.md
 
 .nx/migrate-runs
+
+# ============================================
+# 实验01：开源个人博客系统二次开发
+# 运行时数据和备份不纳入版本管理
+# ============================================
+
+# Ghost本地运行目录（包含数据库、上传文件、日志、密钥）
+/runtime/
+
+# 数据备份目录
+/backups/
+
+# 环境变量（保留.env.example作为模板）
+.env
+.env.local
+.env.*.local
+
+# 主题构建临时文件
+/theme/*/node_modules/
+/theme/*/dist/
+/theme/*/.cache/
+
+# 演示截图和临时文件
+/screenshots/
+*.tmp
+*.temp
