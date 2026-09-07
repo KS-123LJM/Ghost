@@ -1,4 +1,4 @@
-﻿# ============================================
+# ============================================
 # Ghost 博客系统停止脚本
 # 用法：.\scripts\stop.ps1
 # 说明：停止Ghost服务进程
@@ -17,13 +17,13 @@ $stopped = $false
 
 # 方法1：从PID文件读取进程ID并停止
 if (Test-Path $PidFile) {
-    $pid = Get-Content $PidFile -Raw
-    $pid = $pid.Trim()
-    if ($pid -match "^\d+$") {
-        $process = Get-Process -Id $pid -ErrorAction SilentlyContinue
+    $ghostPid = Get-Content $PidFile -Raw
+    $ghostPid = $ghostPid.Trim()
+    if ($ghostPid -match "^\d+$") {
+        $process = Get-Process -Id $ghostPid -ErrorAction SilentlyContinue
         if ($process) {
-            Write-Host "`n[停止] 停止Ghost进程 (PID: $pid)..." -ForegroundColor Yellow
-            Stop-Process -Id $pid -Force -ErrorAction SilentlyContinue
+            Write-Host "`n[停止] 停止Ghost进程 (PID: $ghostPid)..." -ForegroundColor Yellow
+            Stop-Process -Id $ghostPid -Force -ErrorAction SilentlyContinue
             Start-Sleep -Seconds 2
             $stopped = $true
             Write-Host "  进程已停止" -ForegroundColor Green
@@ -75,3 +75,4 @@ if ($portCheck) {
     Write-Host "`n重新启动: .\scripts\start.ps1" -ForegroundColor Gray
     Write-Host "========================================`n" -ForegroundColor Green
 }
+# 脚本结束

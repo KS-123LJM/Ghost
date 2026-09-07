@@ -1,4 +1,4 @@
-﻿# ============================================
+# ============================================
 # Ghost 博客系统启动脚本
 # 用法：.\scripts\start.ps1
 # 说明：直接使用Node.js启动Ghost，不依赖ghost CLI实例注册
@@ -19,8 +19,8 @@ if (-not (Test-Path $RuntimeDir)) {
     exit 1
 }
 
-# 检查端口是否被占用
-$portInUse = Get-NetTCPConnection -LocalPort 2368 -ErrorAction SilentlyContinue
+# 检查端口是否被占用（只检测Listen状态，忽略TimeWait等临时状态）
+$portInUse = Get-NetTCPConnection -LocalPort 2368 -State Listen -ErrorAction SilentlyContinue
 if ($portInUse) {
     $existingPid = $portInUse.OwningProcess | Select-Object -First 1
     Write-Host "[提示] 端口2368已被占用 (PID: $existingPid)，Ghost可能已在运行" -ForegroundColor Yellow
@@ -111,3 +111,5 @@ if ($started) {
     Write-Host "`n[警告] 服务启动超时，请检查日志: $RuntimeDir\content\logs\" -ForegroundColor Yellow
     Write-Host "进程PID: $($process.Id)" -ForegroundColor White
 }
+
+# 脚本结束
